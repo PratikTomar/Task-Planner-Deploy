@@ -1,1 +1,1 @@
-export const TASK_API= "http://localhost:3001/tasks/";
+export const TASK_API= "https://task-planner-api-h7d4.onrender.com/tasks/";
