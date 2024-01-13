@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400|Inconsolata:400");
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+:root {
+  --primary-color: #645cff;
+  --secondary-color: #007bff;
+  --error-color: #ff4d4d;
+  --success-color: #4caf50;
+  --primary-0: #f0efff;
+  --primary-50: #d8d6ff;
+  --primary-100: #c1beff;
+  --primary-200: #aaa5ff;
+  --primary-300: #938dff;
+  --primary-400: #7b74ff;
+
+  --primary-500: #645cff;
+  --primary-600: #554ed9;
+  --primary-700: #4640b3;
+  --primary-800: #37338c;
+  --primary-900: #282566;
+  --primary-1000: #191740;
+  --primary-1100: #0a0919;
+  --grey-0: #fafbfc;
+  --grey-50: #f2f4f8;
+  --grey-100: #eaedf3;
+  --grey-200: #e2e7ef;
+  --grey-300: #dbe0ea;
+  --grey-400: #d3dae6;
+  --grey-500: #cbd3e1;
+  --grey-600: #adb3bf;
+  --grey-700: #8e949e;
+  --grey-800: #70747c;
+  --grey-900: #51545a;
+  --grey-1000: #333538;
+  --grey-1100: #141516;
+
+
+  --black: #222;
+  --white: #fff;
+  --red-light: #f8d7da;
+  --red-dark: #842029;
+  --green-light: #d1e7dd;
+  --green-dark: #0f5132;
+
+
+  --headingFont: "Inconsolata", monospace;
+  --bodyFont: "Montserrat", sans-serif;
+  --smallText: 0.7em;
+
+  --backgroundColor: var(--grey-50);
+  --textColor: var(--grey-1000);
+  --borderRadius: 0.25rem;
+  --transition: 0.3s ease-in-out all;
+  --max-width: 1120px;
+  --fixed-width: 600px;
+
+  --shadow-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-3: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-4: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+body {
+  background: var(--grey-0);
+  color: var(--textColor);
+  font-family: var(--bodyFont);
+  font-weight: 500;
+  line-height: 1.75;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  font-size: 44px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+select option:hover {
+  background-color: var(--primary-400);
+}
+
+select option:checked {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.task-heading {
+  font-size: 32px;
+  margin-bottom: 10px;
+  background-color: var(--black);
+  color: whitesmoke;
+}
+
+.task-text {
+  flex-grow: 1;
+  font-weight: 700;
+  font-size: larger;
+}
+
+.container {
+  max-width: 50%;
+  margin: auto;
+  padding: 20px;
+  box-shadow: var(--shadow-2);
+  border-radius: var(--borderRadius);
+  background-color: var(--white);
+}
+
+.header {
+  font-size: 2.75rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--primary-800);
+}
+
+input,
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 16px;
+  font-size: 22px;
+  margin-bottom: 10px;
+  border: 4px solid var(--primary-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+select {
+  cursor: pointer;
+}
+
+.add-button {
+  background-color: var(--success-color);
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 22px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.add-button:hover {
+  background-color: #4caf50;
+}
+
+.task {
+  padding: 1.5rem;
+  background: var(--white);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadow-2);
+  transition: var(--transition);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.task:hover {
+  box-shadow: var(--shadow-3);
+}
+
+.priority-box,
+.category-box {
+  width: 7rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.priority-high,
+.category-pending {
+  background-color: var(--error-color);
+  color: var(--white);
+}
+
+.priority-medium,
+.category-working {
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+
+.priority-low,
+.category-completed {
+  background-color: var(--success-color);
+  color: var(--white);
+}
+
+.action-buttons button {
+  background-color: var(--secondary-color);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.action-buttons button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: var(--grey-800);
+  color: var(--white);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+
+@media (max-width: 875px) {
+  .container {
+    max-width: 100%;
+  }
+}
