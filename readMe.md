@@ -1,4 +1,4 @@
-# Task Planner Web App
+# Taskee Web App
 
 A simple Task Planner web application built with React for planning tasks, including features like priority and category.
 

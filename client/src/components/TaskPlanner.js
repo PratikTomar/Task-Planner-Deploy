@@ -126,7 +126,7 @@ export const TaskPlanner = () => {
   return (
     <>
       <div className="container">
-        <div className="header">Task Planner</div>
+        <div className="header">Taskee - Task Application</div>
         <input
           type="text"
           placeholder={isEdit ? "Update Task" : "Add Task"}
