@@ -5,8 +5,11 @@ import Filter from "./Filter";
 import SortSelect from "./SortSelect";
 import { TASK_API } from "../utils/constants";
 import { TaskContext } from "../context/TaskContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import { toast } from 'react-toastify';
 
-export const TaskPlanner = () => {
+export const TaskPlanner = ({ onToggleDarkMode, isDarkMode }) => {
   const [activity, setActivity] = useState("");
   const [listData, setListData] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -16,6 +19,7 @@ export const TaskPlanner = () => {
   const [filterPriority, setFilterPriority] = useState("All");
   const [filterCategory, setFilterCategory] = useState("All");
   const [isLoading, setIsLoading] = useState(false);
+  const [isScrollToTop, setIsScrollToTop] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -25,8 +29,14 @@ export const TaskPlanner = () => {
       const { allTasks } = jsonData;
       setListData(allTasks);
       setIsLoading(false);
+
     } catch (err) {
       console.error(`an error occurred: ${err}`);
+      toast.error("Failed to fetch tasks!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+      });
     }
   };
 
@@ -51,6 +61,18 @@ export const TaskPlanner = () => {
           setActivity("");
           setNewPriority("Low");
           setNewCategory("Pending");
+          toast.success("Task updated successfully!", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+          });
+
+        } else {
+          toast.error("Failed to update task!", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+          });
         }
       } else {
         const res = await fetch(TASK_API, {
@@ -69,12 +91,27 @@ export const TaskPlanner = () => {
           setActivity("");
           setNewPriority("Low");
           setNewCategory("Pending");
+          toast.success("Task added successfully!", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+          });
+        } else {
+          toast.error("Failed to add task!", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+          });
         }
       }
-
       fetchData();
     } catch (err) {
       console.error(err);
+      toast.error("An error occurred!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+      });
     }
   };
 
@@ -83,6 +120,7 @@ export const TaskPlanner = () => {
     setEditIndex(id);
     setIsEdit(true);
     setActivity(taskToEdit.name);
+    setIsScrollToTop((prev) => !prev);
   };
 
   const removeActivity = async (id) => {
@@ -90,9 +128,25 @@ export const TaskPlanner = () => {
       const res = await fetch(`${TASK_API}${id}`, { method: "DELETE" });
       if (res.ok) {
         fetchData();
+        toast.success("Task removed successfully!", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+        });
+      } else {
+        toast.error("Failed to remove task!", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+        });
       }
     } catch (err) {
       console.error(err);
+      toast.error("An error occurred!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+      });
     }
   };
 
@@ -123,9 +177,21 @@ export const TaskPlanner = () => {
     }
     return b.priority.localeCompare(a.priority);
   });
+
+  useEffect(() => {
+    if (isScrollToTop) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setIsScrollToTop((prev) => !prev);
+    }
+  }, [isScrollToTop]);
+
   return (
     <>
-      <div className="container">
+      <div className={`container ${isDarkMode ? 'dark-mode' : ''}`}>
+        <div className="action-buttons">
+          <button onClick={onToggleDarkMode}>{isDarkMode ? <FontAwesomeIcon icon={faMoon} /> : <FontAwesomeIcon icon={faSun} />}
+          </button>
+        </div>
         <div className="header">Taskee - Task Application</div>
         <input
           type="text"
@@ -156,10 +222,10 @@ export const TaskPlanner = () => {
           >
             {isEdit ? "Update Task" : "Add Task"}
           </button>
+          <SortSelect />
           {sortedTasks.length >= 1 ? (
             <>
               <p className="task-heading">Here are your tasks</p>
-              <SortSelect />
             </>
           ) : (
             <p className="task-heading">There is no task, Try to add some</p>

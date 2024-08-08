@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400|Inconsolata:400");
+
 *,
 ::after,
 ::before {
   box-sizing: border-box;
 }
+
 :root {
   --primary-color: #645cff;
   --secondary-color: #007bff;
@@ -102,10 +104,12 @@ select option:checked {
   flex-grow: 1;
   font-weight: 700;
   font-size: larger;
+  max-width: 50%;
 }
 
 .container {
   max-width: 50%;
+  min-height: 100vh;
   margin: auto;
   padding: 20px;
   box-shadow: var(--shadow-2);
@@ -117,7 +121,7 @@ select option:checked {
   font-size: 2.75rem;
   font-weight: bold;
   margin-bottom: 15px;
-  color: var(--primary-800);
+  color: var(--primary-600);
 }
 
 input,
@@ -209,6 +213,14 @@ select {
   transition: background-color 0.3s ease-in-out;
 }
 
+.action-buttons button.remove-task {
+  background-color: var(--error-color);
+}
+
+.action-buttons button.remove-task:hover {
+  background-color: var(--red-dark);
+}
+
 .action-buttons button:hover {
   background-color: #0056b3;
 }
@@ -220,9 +232,29 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.add-button {
+  margin-bottom: 16px;
+}
 
 @media (max-width: 875px) {
   .container {
     max-width: 100%;
   }
+}
+
+/* Dark mode styles */
+.container.dark-mode {
+  color: var(--white);
+  background-color: var(--black);
+}
+
+.container.dark-mode .task,
+.container.dark-mode input,
+.container.dark-mode select {
+  color: var(--white);
+  background-color: var(--black);
+}
+
+.container.dark-mode .task-heading {
+  background-color: var(--primary-600);
 }

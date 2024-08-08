@@ -1,6 +1,8 @@
-body {
+.app {
     background-color: #ccddff;
-}
-.app{
     text-align: center;
+}
+
+.app.dark-mode {
+    background-color: black;
 }
