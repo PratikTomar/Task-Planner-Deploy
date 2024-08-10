@@ -7,7 +7,7 @@ import { TASK_API } from "../utils/constants";
 import { TaskContext } from "../context/TaskContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 export const TaskPlanner = ({ onToggleDarkMode, isDarkMode }) => {
   const [activity, setActivity] = useState("");
@@ -29,7 +29,6 @@ export const TaskPlanner = ({ onToggleDarkMode, isDarkMode }) => {
       const { allTasks } = jsonData;
       setListData(allTasks);
       setIsLoading(false);
-
     } catch (err) {
       console.error(`an error occurred: ${err}`);
       toast.error("Failed to fetch tasks!", {
@@ -66,7 +65,6 @@ export const TaskPlanner = ({ onToggleDarkMode, isDarkMode }) => {
             autoClose: 3000,
             hideProgressBar: true,
           });
-
         } else {
           toast.error("Failed to update task!", {
             position: "top-center",
@@ -187,9 +185,14 @@ export const TaskPlanner = ({ onToggleDarkMode, isDarkMode }) => {
 
   return (
     <>
-      <div className={`container ${isDarkMode ? 'dark-mode' : ''}`}>
+      <div className={`container ${isDarkMode ? "dark-mode" : ""}`}>
         <div className="action-buttons">
-          <button onClick={onToggleDarkMode}>{isDarkMode ? <FontAwesomeIcon icon={faMoon} /> : <FontAwesomeIcon icon={faSun} />}
+          <button onClick={onToggleDarkMode}>
+            {isDarkMode ? (
+              <FontAwesomeIcon icon={faMoon} />
+            ) : (
+              <FontAwesomeIcon icon={faSun} />
+            )}
           </button>
         </div>
         <div className="header">Taskee - Task Application</div>

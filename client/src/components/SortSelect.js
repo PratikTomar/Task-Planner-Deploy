@@ -14,7 +14,6 @@ const SortSelect = () => {
       <select
         value={filterPriority}
         onChange={(e) => {
-          console.log(e.target);
           setFilterPriority(e.target.value);
         }}
         className="priority-filter"
